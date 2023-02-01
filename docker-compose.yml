@@ -10,4 +10,10 @@ services:
     ports:
       - '3306:3306'
     volumes:
-      - ./mariadb-data:/var/lib/mysql
+      - ./mariadb-data:/var/lib/mysql/
+  apache2:
+    image: httpd:2.4-alpine
+    ports:
+      - '8080:80'
+    volumes:
+      - ./public-html/:/usr/local/apache2/htdocs
