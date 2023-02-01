@@ -11,9 +11,22 @@ services:
       - '3306:3306'
     volumes:
       - ./mariadb-data:/var/lib/mysql/
-  apache2:
-    image: httpd:2.4-alpine
-    ports:
+#    apache2:
+#    image: httpd:2.4-alpine
+#    ports:
+#      - '8080:80'
+#    volumes:
+#      - ./public-html/:/usr/local/apache2/htdocs
+  wordpress:
+    image: wordpress
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: mariadb
+      WORDPRESS_DB_USER: example-user
+      WORDPRESS_DB_PASSWORD: my_cool_secret
+      WORDPRESS_DB_NAME: wordpress
+    ports: 
       - '8080:80'
     volumes:
-      - ./public-html/:/usr/local/apache2/htdocs
+      - ./wordpress/:/var/www/html
+
